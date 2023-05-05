@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    gap: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+}
+
+.container {
+    width: 300px;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #181818;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-region {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+}
+.options {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.options > div > img {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    width: 80px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.options > div:hover {
+    transform: translateY(-5px);
+}
+
+.output-region {
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.output-region .output-titles {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+}
+
+.output-region .outputs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+img {
+    width: 50px;
+}
+
+.user-output-image {
+    transform: rotate(90deg) translateY(-10px);
+}
+
+.computer-output-image {
+    transform: rotate(-90deg) rotateY(180deg) translateY(-10px);
+}
+
+.output-message {
+    font-size: 0.7rem;
+    white-space: nowrap;
+    text-align: center;
+}
+
+@media (min-width: 720px) {
+    .container {
+        width: 700px;
+        flex-direction: row;
+    }
+    .input-region .options{
+        justify-content: space-around;
+    }
+    .output-region {
+        width: 100%;
+    }
+    .output-message {
+        font-size: 1rem;
+    }
+}
