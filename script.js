@@ -1,10 +1,9 @@
+const container = document.querySelector('.container');
 const user_choices = document.querySelectorAll('.input');
 
 function getComputerChoice() {
     return Math.floor(Math.random() * 3);
 }
-
-let userChoice = '', computerChoice = 0;
 
 const userOutput = document.querySelector('.user-output-image');
 const computerOutput = document.querySelector('.computer-output-image');
@@ -32,6 +31,7 @@ function getWinner(userChoice, computerChoice, e) {
 const userScore = document.querySelector('.user-score');
 const computerScore = document.querySelector('.computer-score');
 const output_message = document.querySelector('.output-message');
+const game_message = document.querySelector('.game-message');
 function updateScore(winner, userChoice, computerChoice) {
     if (winner === 'User') {
         userScore.innerText = parseFloat(userScore.innerText) + 1;
@@ -42,12 +42,28 @@ function updateScore(winner, userChoice, computerChoice) {
     } else {
         output_message.innerText = `Draw!`;
     }
+
+    // round winner message
+    if (parseFloat(userScore.innerText) === 5) {
+        game_message.style.display = 'block';
+        game_message.innerHTML = 
+        `You won ${parseFloat(userScore.innerText)} - ${parseFloat(computerScore.innerText)} 
+        <br> Press restart to replay.`
+    } else if (parseFloat(computerScore.innerText) === 5){
+        game_message.style.display = 'block';
+        game_message.innerHTML = 
+        `You lost ${parseFloat(userScore.innerText)} - ${parseFloat(computerScore.innerText)} 
+        <br> Press restart to replay.`
+    }
 }
+
+let userChoice = '', computerChoice = 0;
 
 user_choices.forEach(choice => {
     choice.addEventListener('click', (e) => {
         // user_choices.forEach(choice => choice.parentElement.classList.remove('selected'));
         // e.target.parentElement.classList.add('selected');
+        container.classList.add('start')
         switch (true) {
             case e.target.parentElement.classList.contains('rock-input'):
                 userChoice = 'Rock';
@@ -62,23 +78,36 @@ user_choices.forEach(choice => {
         computerChoice = getComputerChoice();
         let userChoiceIndex = ['Rock', 'Paper', 'Scissors'].indexOf(userChoice); // getting index version of user choice
 
-        updateOutput(userChoiceIndex, computerChoice, e);
+        // message hidden until output
+        output_message.innerText = '';
 
-        // update computer choice names for winner and score
-        computerChoice = ['Rock', 'Paper', 'Scissors'][computerChoice];
+        // animation and delay
+        let time = setTimeout(() => {
+            container.classList.remove('start')
 
-        let winner = getWinner(userChoice, computerChoice, e);
-        updateScore(winner, userChoice, computerChoice);
+            updateOutput(userChoiceIndex, computerChoice, e);
+
+            // update computer choice names for winner and score
+            computerChoice = ['Rock', 'Paper', 'Scissors'][computerChoice];
+
+            let winner = getWinner(userChoice, computerChoice, e);
+            updateScore(winner, userChoice, computerChoice);
+        }, 2700)
     })
 })
 
 const resetBtn = document.querySelector('.reset-btn');
 resetBtn.addEventListener('click', () => {
     output_message.innerText = '', userScore.innerText = 0, computerScore.innerText = 0;
+    container.classList.remove('start')
+
     userChoice = '';
     computerChoice = 0;
 
     // default images
     userOutput.src = choices[0];
     computerOutput.src = choices[0];
+
+    //hide message 
+    game_message.style.display = 'none';
 })

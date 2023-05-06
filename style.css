@@ -90,12 +90,36 @@ img {
     width: 50px;
 }
 
+.container.start .user-output-image {
+    animation: userShake 0.7s ease infinite;
+}
+
+@keyframes userShake {
+    50% {
+        transform: rotate(40deg);
+    }
+}
+
+.container.start .computer-output-image {
+    animation: computerShake 0.7s ease infinite;
+}
+
+@keyframes computerShake {
+    50% {
+        transform: rotate(-140deg);
+    }
+}
+
 .user-output-image {
     transform: rotate(90deg) translateY(-10px);
 }
 
+.computer-output {
+    transform: rotateX(180deg);
+}
+
 .computer-output-image {
-    transform: rotate(-90deg) rotateY(180deg) translateY(-10px);
+    transform: rotate(-90deg) translateY(-10px); 
 }
 
 .output-message {
@@ -114,30 +138,8 @@ img {
     cursor: pointer;
 }
 
-@media (min-width: 720px) {
-    .input-output {
-        width: 700px;
-        display: grid;
-        grid-template: 1fr 60px / 1fr 1fr;
-    }
-    .input-region .options{
-        justify-content: space-around;
-    }
-    .output-region {
-        width: 100%;
-    }
-    .output-message {
-        font-size: 1rem;
-    }
-    .user-output-image {
-    transform: rotate(90deg) translateY(-50px);
-    }
-    .computer-output-image {
-        transform: rotate(-90deg) rotateY(180deg) translateY(-50px);
-    }
-    .reset-btn {
-        width: 50%;
-        grid-column: 1 / span 2;
-        margin-left: 25%;
-    }
+.game-message {
+    font-size: 1rem;
+    text-align: center;
+    display: none;
 }
