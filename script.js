@@ -4,14 +4,14 @@ function getComputerChoice() {
     return Math.floor(Math.random() * 3);
 }
 
-let userChoice = '';
-let userScore = 0, computerScore = 0;
+let userChoice = '', computerChoice = 0;
+
+const userOutput = document.querySelector('.user-output-image');
+const computerOutput = document.querySelector('.computer-output-image');
+let choices = ['images/rock.png', 'images/paper.png', 'images/scissors.png'];
 
 function updateOutput(userChoice, computerChoice, e) {
-    const userOutput = document.querySelector('.user-output-image');
-    const computerOutput = document.querySelector('.computer-output-image');
-
-    let choices = ['images/rock.png', 'images/paper.png', 'images/scissors.png'];
+    console.log(userChoice, computerChoice)
 
     userOutput.src = choices[userChoice]; // display user's choice in output
     computerOutput.src = choices[computerChoice] // display computer's choice in output
@@ -29,25 +29,25 @@ function getWinner(userChoice, computerChoice, e) {
     }
 }
 
+const userScore = document.querySelector('.user-score');
+const computerScore = document.querySelector('.computer-score');
+const output_message = document.querySelector('.output-message');
 function updateScore(winner, userChoice, computerChoice) {
-    const userScore = document.querySelector('.user-score');
-    const computerScore = document.querySelector('.computer-score');
-
-    const output_message = document.querySelector('.output-message');
-
     if (winner === 'User') {
-        userScore.textContent = parseFloat(userScore.textContent) + 1;
-        output_message.textContent = `You Win! ${userChoice} > ${computerChoice}`;
+        userScore.innerText = parseFloat(userScore.innerText) + 1;
+        output_message.innerText = `You Win! ${userChoice} > ${computerChoice}`;
     } else if (winner === 'Computer') {
-        computerScore.textContent = parseFloat(computerScore.textContent) + 1;
-        output_message.textContent = `You Lose! ${userChoice} < ${computerChoice}`;
+        computerScore.innerText = parseFloat(computerScore.innerText) + 1;
+        output_message.innerText = `You Lose! ${userChoice} < ${computerChoice}`;
     } else {
-        output_message.textContent = `Draw!`;
+        output_message.innerText = `Draw!`;
     }
 }
 
 user_choices.forEach(choice => {
     choice.addEventListener('click', (e) => {
+        // user_choices.forEach(choice => choice.parentElement.classList.remove('selected'));
+        // e.target.parentElement.classList.add('selected');
         switch (true) {
             case e.target.parentElement.classList.contains('rock-input'):
                 userChoice = 'Rock';
@@ -59,7 +59,7 @@ user_choices.forEach(choice => {
                 userChoice = 'Scissors';
                 break;
         }
-        let computerChoice = getComputerChoice();
+        computerChoice = getComputerChoice();
         let userChoiceIndex = ['Rock', 'Paper', 'Scissors'].indexOf(userChoice); // getting index version of user choice
 
         updateOutput(userChoiceIndex, computerChoice, e);
@@ -72,3 +72,13 @@ user_choices.forEach(choice => {
     })
 })
 
+const resetBtn = document.querySelector('.reset-btn');
+resetBtn.addEventListener('click', () => {
+    output_message.innerText = '', userScore.innerText = 0, computerScore.innerText = 0;
+    userChoice = '';
+    computerChoice = 0;
+
+    // default images
+    userOutput.src = choices[0];
+    computerOutput.src = choices[0];
+})
