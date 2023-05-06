@@ -61,8 +61,6 @@ let userChoice = '', computerChoice = 0;
 
 user_choices.forEach(choice => {
     choice.addEventListener('click', (e) => {
-        // user_choices.forEach(choice => choice.parentElement.classList.remove('selected'));
-        // e.target.parentElement.classList.add('selected');
         container.classList.add('start')
         switch (true) {
             case e.target.parentElement.classList.contains('rock-input'):
@@ -78,8 +76,10 @@ user_choices.forEach(choice => {
         computerChoice = getComputerChoice();
         let userChoiceIndex = ['Rock', 'Paper', 'Scissors'].indexOf(userChoice); // getting index version of user choice
 
-        // message hidden until output
+        // reset text and images after each trial
         output_message.innerText = '';
+        userOutput.src = choices[0];
+        computerOutput.src = choices[0];
 
         // animation and delay
         let time = setTimeout(() => {
